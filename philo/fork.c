@@ -1,24 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/12 15:34:05 by takhayas          #+#    #+#             */
-/*   Updated: 2026/05/13 11:40:02 by takhayas         ###   ########.fr       */
+/*   Created: 2026/05/13 11:40:55 by takhayas          #+#    #+#             */
+/*   Updated: 2026/05/13 11:40:56 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-#include "pthread.h"
-
-int	main(int argc, char **argv)
-{
-	t_rules			rules;
-	pthread_mutex_t	*fork;
-
-	if (parse_input(argc, argv, &rules))
-		return (1);
-	return (0);
-}
