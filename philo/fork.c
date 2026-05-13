@@ -6,7 +6,48 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 11:40:55 by takhayas          #+#    #+#             */
-/*   Updated: 2026/05/13 11:40:56 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/05/13 12:20:40 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "philo.h"
+
+int	fork_prepare(t_rules *rules)
+{
+	int	i;
+
+	rules->forks = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) * rules->n_philo);
+	if (!rules->forks)
+		return (1);
+	i = 0;
+	while (i < rules->n_philo)
+	{
+		if (pthread_mutex_init(&rules->forks[i], NULL))
+		{
+			i--;
+			while (i >= 0)
+			{
+				pthread_mutex_destroy(&rules->forks[i]);
+				i--;
+			}
+			free(rules->forks);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	destroy_all_fork(t_rules *rules)
+{
+	int	i;
+
+	i = 0;
+	while (i < rules->n_philo)
+	{
+		pthread_mutex_destroy(&(rules->forks)[i]);
+		i++;
+	}
+	free(rules->forks);
+	return ;
+}

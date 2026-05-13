@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:37:19 by takhayas          #+#    #+#             */
-/*   Updated: 2026/05/13 11:34:25 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/05/13 11:49:32 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ int	parse_input(int argc, char **argv, t_rules *rules)
 	}
 	else
 		rules->must_eat_count = -1;
-	rules->num_of_philo = atoi_philo(argv[1]);
-	rules->time_to_die = atoi_philo(argv[2]);
-	rules->time_to_eat = atoi_philo(argv[3]);
-	rules->time_to_sleep = atoi_philo(argv[4]);
+	rules->n_philo = atoi_philo(argv[1]);
+	rules->t_to_die = atoi_philo(argv[2]);
+	rules->t_to_eat = atoi_philo(argv[3]);
+	rules->t_to_sleep = atoi_philo(argv[4]);
 	return (0);
 }
