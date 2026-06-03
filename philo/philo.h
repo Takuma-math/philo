@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:35:49 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 22:42:06 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/03 23:45:40 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_rules
 	pthread_mutex_t	print_mutex;
 	int				is_dead;
 	pthread_mutex_t	death_mutex;
+	pthread_t 		monitor_thread;
 }	t_rules;
 
 typedef struct s_philo
@@ -41,6 +42,8 @@ typedef struct s_philo
 	t_rules			*rules;
 	long long       last_meal_time;
 	pthread_mutex_t meal_mutex;
+	pthread_t		thread;
+	int				meal_count;
 }	t_philo;
 
 // parse_input.c
@@ -50,11 +53,13 @@ int		parse_input(int argc, char **argv, t_rules *rules);
 int		fork_prepare(t_rules *rules);
 void	destroy_all_fork(t_rules *rules);
 
-// philo_prepare.c
+// prepare.c
 int		prepare_philos(t_philo **philos, t_rules *rules);
-
+void	prepare_rules(t_rules *rules);
+int		start_simulation(t_rules *rules, t_philo *philos);
 // philo_routine.c
 long long	get_time_ms(void);
+void	*philo_routine(void	*arg);
 
 //utils.c
 void	print_status(t_philo *philo, char *status);

@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:06:30 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 22:39:56 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/03 23:09:15 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ void	*monitor_routine(void *arg)
 				printf("%lld %d died\n", get_time_ms() - rules->start_time,
 					philos[i].id);
 				pthread_mutex_unlock(&rules->print_mutex);
+				return (NULL);
+			}
+			if (philos[i].meal_count > rules->must_eat_count)
+			{
+				pthread_mutex_lock(&rules->death_mutex);
+				rules->is_dead = 1;
+				pthread_mutex_unlock(&rules->death_mutex);
 				return (NULL);
 			}
 			i++;

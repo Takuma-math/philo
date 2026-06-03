@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 01:40:37 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 22:42:42 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/03 23:00:41 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	*philo_routine(void	*arg)
 		pthread_mutex_unlock(&philo->meal_mutex);
 		print_status(philo, "is eating");
 		ft_usleep(philo->rules->t_to_eat);
+		philo->meal_count++;
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(philo->right_fork);
 		print_status(philo, "is sleeping");
