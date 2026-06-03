@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:37:19 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/04 01:40:31 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:52:21 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	parse_input(int argc, char **argv, t_rules *rules)
 	i = 1;
 	if (argc != 5 && argc != 6)
 		return (printf("too many or few inputs\n"), 1);
-
 	while (i < 5)
 	{
 		if (atoi_philo(argv[i]) < 0)

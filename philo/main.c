@@ -6,12 +6,11 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:34:05 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/04 01:33:05 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:51:45 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 int	main(int argc, char **argv)
 {

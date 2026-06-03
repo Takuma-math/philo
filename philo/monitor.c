@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:06:30 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/04 01:16:28 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:48:49 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	check_dead_status(t_rules *rules)
 
 void	*monitor_routine(void *arg)
 {
-	t_philo	*philos;
-	t_rules	*rules;
-	int		i;
-	int		meal_complete_num;
+	t_philo		*philos;
+	t_rules		*rules;
+	int			i;
+	int			meal_complete_num;
 	long long	last_meal;
 
 	philos = (t_philo *)arg;

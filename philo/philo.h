@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:35:49 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/04 01:19:13 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:51:03 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_rules
 	pthread_mutex_t	print_mutex;
 	int				is_dead;
 	pthread_mutex_t	death_mutex;
-	pthread_t 		monitor_thread;
+	pthread_t		monitor_thread;
 }	t_rules;
 
 typedef struct s_philo
@@ -40,32 +40,32 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	t_rules			*rules;
-	long long       last_meal_time;
-	pthread_mutex_t meal_mutex;
+	long long		last_meal_time;
+	pthread_mutex_t	meal_mutex;
 	pthread_t		thread;
 	int				meal_count;
 }	t_philo;
 
 // parse_input.c
-int		parse_input(int argc, char **argv, t_rules *rules);
+int			parse_input(int argc, char **argv, t_rules *rules);
 
 // fork.c
-int		fork_prepare(t_rules *rules);
-void	destroy_all_fork(t_rules *rules);
+int			fork_prepare(t_rules *rules);
+void		destroy_all_fork(t_rules *rules);
 
 // prepare.c
-int		prepare_philos(t_philo **philos, t_rules *rules);
-int	prepare_rules(t_rules *rules);
-int		start_simulation(t_rules *rules, t_philo *philos);
+int			prepare_philos(t_philo **philos, t_rules *rules);
+int			prepare_rules(t_rules *rules);
+int			start_simulation(t_rules *rules, t_philo *philos);
 // philo_routine.c
 long long	get_time_ms(void);
-void	*philo_routine(void	*arg);
+void		*philo_routine(void	*arg);
 
 //utils.c
-void	print_status(t_philo *philo, char *status);
-void	ft_usleep(long long milliseconds, t_rules *rules);
+void		print_status(t_philo *philo, char *status);
+void		ft_usleep(long long milliseconds, t_rules *rules);
 
 // monitor.c
-int	check_dead_status(t_rules *rules);
-void	*monitor_routine(void *arg);
+int			check_dead_status(t_rules *rules);
+void		*monitor_routine(void *arg);
 #endif

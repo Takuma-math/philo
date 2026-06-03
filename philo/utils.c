@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 17:27:51 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/04 01:42:11 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:49:06 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,4 @@ void	ft_usleep(long long milliseconds, t_rules *rules)
 			break ;
 		usleep(100);
 	}
-
 }

@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 12:43:34 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/04 01:46:20 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:49:55 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	start_monitor_thread(t_rules *rules, t_philo *philos)
 	return (0);
 }
 
-int	start_simulation (t_rules *rules, t_philo *philos)
+int	start_simulation(t_rules *rules, t_philo *philos)
 {
 	int	i;
 
