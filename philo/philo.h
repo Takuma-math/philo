@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:35:49 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 21:57:47 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/03 22:42:06 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,8 @@ long long	get_time_ms(void);
 //utils.c
 void	print_status(t_philo *philo, char *status);
 void	ft_usleep(long long milliseconds);
+
+// monitor.c
+int	check_dead_status(t_rules *rules);
+void	*monitor_routine(void *arg);
 #endif

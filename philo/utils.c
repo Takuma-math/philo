@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 17:27:51 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 17:48:13 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/03 22:27:06 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@ void	print_status(t_philo *philo, char *status)
 {
 	long long	timestamp;
 
+	if (check_dead_status(philo->rules))
+		return ;
 	pthread_mutex_lock(&philo->rules->print_mutex);
-	if (!philo->rules->is_dead)
-	{
-		timestamp = get_time_ms() - philo->rules->start_time;
-		printf("%lld %d %s\n", timestamp, philo->id, status);
-	}
+	timestamp = get_time_ms() - philo->rules->start_time;
+	printf("%lld %d %s\n", timestamp, philo->id, status);
 	pthread_mutex_unlock(&philo->rules->print_mutex);
 }
 

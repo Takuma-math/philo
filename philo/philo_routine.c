@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 01:40:37 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 22:03:13 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/03 22:42:42 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	*philo_routine(void	*arg)
 	philo = (t_philo *)arg;
 	if (philo->id % 2 == 0)
 		usleep(1500);
-	while (1)
+	while (check_dead_status(philo->rules) == 0)
 	{
 		if (philo->id % 2 == 0)
 		{
