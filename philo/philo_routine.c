@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/16 01:40:37 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 23:00:41 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:26:04 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,20 @@ long long	get_time_ms(void)
 void	*philo_routine(void	*arg)
 {
 	t_philo	*philo;
+	t_rules	*rules;
 
 	philo = (t_philo *)arg;
+	rules = philo->rules;
 	if (philo->id % 2 == 0)
 		usleep(1500);
+	if (philo->rules->n_philo == 1)
+	{
+		pthread_mutex_lock(philo->left_fork);
+		print_status(philo, "has taken a fork");
+		ft_usleep(philo->rules->t_to_die, rules);
+		pthread_mutex_unlock(philo->left_fork);
+		return (NULL);
+	}
 	while (check_dead_status(philo->rules) == 0)
 	{
 		if (philo->id % 2 == 0)
@@ -46,14 +56,14 @@ void	*philo_routine(void	*arg)
 		}
 		pthread_mutex_lock(&philo->meal_mutex);
 		philo->last_meal_time = get_time_ms();
+		philo->meal_count++;
 		pthread_mutex_unlock(&philo->meal_mutex);
 		print_status(philo, "is eating");
-		ft_usleep(philo->rules->t_to_eat);
-		philo->meal_count++;
+		ft_usleep(philo->rules->t_to_eat, rules);
 		pthread_mutex_unlock(philo->left_fork);
 		pthread_mutex_unlock(philo->right_fork);
 		print_status(philo, "is sleeping");
-		ft_usleep(philo->rules->t_to_sleep);
+		ft_usleep(philo->rules->t_to_sleep, rules);
 		print_status(philo, "is thinking");
 	}
 	return (NULL);

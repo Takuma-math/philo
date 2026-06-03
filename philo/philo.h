@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:35:49 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 23:45:40 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:19:13 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	destroy_all_fork(t_rules *rules);
 
 // prepare.c
 int		prepare_philos(t_philo **philos, t_rules *rules);
-void	prepare_rules(t_rules *rules);
+int	prepare_rules(t_rules *rules);
 int		start_simulation(t_rules *rules, t_philo *philos);
 // philo_routine.c
 long long	get_time_ms(void);
@@ -63,7 +63,7 @@ void	*philo_routine(void	*arg);
 
 //utils.c
 void	print_status(t_philo *philo, char *status);
-void	ft_usleep(long long milliseconds);
+void	ft_usleep(long long milliseconds, t_rules *rules);
 
 // monitor.c
 int	check_dead_status(t_rules *rules);

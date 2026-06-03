@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:06:30 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 23:09:15 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:16:28 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	*monitor_routine(void *arg)
 	t_philo	*philos;
 	t_rules	*rules;
 	int		i;
+	int		meal_complete_num;
 	long long	last_meal;
 
 	philos = (t_philo *)arg;
@@ -34,10 +35,14 @@ void	*monitor_routine(void *arg)
 	while (1)
 	{
 		i = 0;
+		meal_complete_num = 0;
 		while (i < rules->n_philo)
 		{
 			pthread_mutex_lock(&philos[i].meal_mutex);
 			last_meal = philos[i].last_meal_time;
+			if (rules->must_eat_count != -1
+				&& philos[i].meal_count >= rules->must_eat_count)
+				meal_complete_num++;
 			pthread_mutex_unlock(&philos[i].meal_mutex);
 			if (get_time_ms() - last_meal > rules->t_to_die)
 			{
@@ -50,7 +55,7 @@ void	*monitor_routine(void *arg)
 				pthread_mutex_unlock(&rules->print_mutex);
 				return (NULL);
 			}
-			if (philos[i].meal_count > rules->must_eat_count)
+			if (meal_complete_num == rules->n_philo)
 			{
 				pthread_mutex_lock(&rules->death_mutex);
 				rules->is_dead = 1;

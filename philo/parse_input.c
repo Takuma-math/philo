@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:37:19 by takhayas          #+#    #+#             */
-/*   Updated: 2026/05/13 11:49:32 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:40:31 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	atoi_philo(char *input)
 		num += (long)(*input - '0');
 		input++;
 	}
-	if (num > 2147483647 || num < 1)
+	if (num > 2147483647 || num < 0)
 		return (-1);
 	return ((int)num);
 }
@@ -78,6 +78,8 @@ int	parse_input(int argc, char **argv, t_rules *rules)
 	else
 		rules->must_eat_count = -1;
 	rules->n_philo = atoi_philo(argv[1]);
+	if (rules->n_philo < 1)
+		return (printf("number of philosophers must be at least 1\n"), 1);
 	rules->t_to_die = atoi_philo(argv[2]);
 	rules->t_to_eat = atoi_philo(argv[3]);
 	rules->t_to_sleep = atoi_philo(argv[4]);

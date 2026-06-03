@@ -6,17 +6,23 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 12:43:34 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 23:51:20 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/04 01:46:20 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	prepare_rules(t_rules *rules)
+int	prepare_rules(t_rules *rules)
 {
 	rules->is_dead = 0;
-	pthread_mutex_init(&(rules->print_mutex), NULL);
-	pthread_mutex_init(&((rules->death_mutex)), NULL);
+	if (pthread_mutex_init(&(rules->print_mutex), NULL))
+		return (1);
+	if (pthread_mutex_init(&((rules->death_mutex)), NULL))
+	{
+		pthread_mutex_destroy(&(rules->print_mutex));
+		return (1);
+	}
+	return (0);
 }
 
 int	prepare_philos(t_philo **philos, t_rules *rules)
@@ -34,7 +40,14 @@ int	prepare_philos(t_philo **philos, t_rules *rules)
 		(*philos)[i].right_fork = &rules->forks[(i + 1) % rules->n_philo];
 		(*philos)[i].rules = rules;
 		(*philos)[i].meal_count = 0;
-		pthread_mutex_init(&((*philos)[i].meal_mutex), NULL);
+		if (pthread_mutex_init(&((*philos)[i].meal_mutex), NULL) != 0)
+		{
+			while (--i >= 0)
+				pthread_mutex_destroy(&((*philos)[i].meal_mutex));
+			free(*philos);
+			*philos = NULL;
+			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -47,6 +60,7 @@ static int	start_philo_thread(t_rules *rules, t_philo *philos)
 	i = 0;
 	while (i < rules->n_philo)
 	{
+		philos[i].last_meal_time = rules->start_time;
 		if (pthread_create(&philos[i].thread, NULL, &philo_routine, &philos[i]))
 		{
 			pthread_mutex_lock(&rules->death_mutex);
