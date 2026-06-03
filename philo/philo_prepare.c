@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo_prepare.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/12 15:34:05 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/03 14:37:52 by takhayas         ###   ########.fr       */
+/*   Created: 2026/05/13 12:43:34 by takhayas          #+#    #+#             */
+/*   Updated: 2026/06/03 21:53:44 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
-int	main(int argc, char **argv)
+int	prepare_philos(t_philo **philos, t_rules *rules)
 {
-	t_rules	rules;
-	t_philo	*philos;
+	int	i;
 
-	if (parse_input(argc, argv, &rules))
+	*philos = (t_philo *) malloc(sizeof(t_philo) * rules->n_philo);
+	if (!(*philos))
 		return (1);
-	if (fork_prepare(&rules))
-		return (printf("fail to create fork_mutex"), 1);
-	if (prepare_philos(&philos, &rules))
-		return (printf("fail to create philos"), 1);
-	rules.start_time = get_time_ms();
-	destroy_all_fork(&rules);
+	i = 0;
+	while (i < rules->n_philo)
+	{
+		(*philos)[i].id = i + 1;
+		(*philos)[i].left_fork = &rules->forks[i % rules->n_philo];
+		(*philos)[i].right_fork = &rules->forks[(i + 1) % rules->n_philo];
+		(*philos)[i].rules = rules;
+		pthread_mutex_init(&((*philos)[i].meal_mutex), NULL);
+		i++;
+	}
 	return (0);
 }

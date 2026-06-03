@@ -6,7 +6,7 @@ RM          = rm -f
 # SRC_DIR     = philo/
 # SRC         = $(SRC_DIR)main.c
 
-SRC         = main.c parse_input.c fork.c
+SRC         = main.c parse_input.c fork.c philo_prepare.c philo_routine.c utils.c
 OBJ         = $(SRC:.c=.o)
 
 all: $(NAME)
