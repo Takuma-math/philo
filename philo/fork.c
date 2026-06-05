@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 11:40:55 by takhayas          #+#    #+#             */
-/*   Updated: 2026/05/13 12:20:40 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/06 01:09:43 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	fork_prepare(t_rules *rules)
 {
 	int	i;
 
-	rules->forks = (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) * rules->n_philo);
+	rules->forks = (pthread_mutex_t *)
+		malloc(sizeof(pthread_mutex_t) * rules->n_philo);
 	if (!rules->forks)
 		return (1);
 	i = 0;
