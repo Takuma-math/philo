@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:35:49 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/04 01:51:03 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/06 01:51:26 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ void		*philo_routine(void	*arg);
 //utils.c
 void		print_status(t_philo *philo, char *status);
 void		ft_usleep(long long milliseconds, t_rules *rules);
+int			is_digit(char c);
+int			ft_strlen(char *str);
+int			atoi_philo(char *input);
 
 // monitor.c
 int			check_dead_status(t_rules *rules);

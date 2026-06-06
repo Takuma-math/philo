@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:34:05 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/06 01:43:28 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/06 01:53:31 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	mutex_destroyer(t_rules *rules, t_philo *philos, int i)
 {
-	int j;
+	int	j;
 
 	pthread_mutex_destroy(&rules->print_mutex);
 	pthread_mutex_destroy(&rules->death_mutex);
