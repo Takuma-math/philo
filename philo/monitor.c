@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:06:30 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/06 11:20:30 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/07 00:56:22 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static void	frag_dead(t_rules *rules)
 	return ;
 }
 
-static void	dead_print(t_rules *rules, t_philo philo)
+static void	dead_print(t_rules *rules, t_philo *philo)
 {
 	pthread_mutex_lock(&rules->print_mutex);
 	printf("%lld %d died\n", get_time_ms() - rules->start_time,
-		philo.id);
+		philo->id);
 	pthread_mutex_unlock(&rules->print_mutex);
 	return ;
 }
@@ -42,7 +42,7 @@ static void	dead_print(t_rules *rules, t_philo philo)
 static int	m_check(t_rules *rules, t_philo *phi, int *m_num)
 {
 	long long	current_time;
-	int		is_dead;
+	int			is_dead;
 
 	current_time = get_time_ms();
 	pthread_mutex_lock(&phi->meal_mutex);
@@ -70,7 +70,7 @@ void	*monitor_routine(void *arg)
 		while (i < rules->n_philo)
 		{
 			if (m_check(rules, &philos[i], &meal_complete_num))
-				return (frag_dead(rules), dead_print(rules, philos[i]), NULL);
+				return (frag_dead(rules), dead_print(rules, &philos[i]), NULL);
 			if (meal_complete_num == rules->n_philo)
 				return (frag_dead(rules), NULL);
 			i++;
