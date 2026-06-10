@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 11:40:55 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/06 01:09:43 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/10 09:22:08 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	fork_prepare(t_rules *rules)
 				i--;
 			}
 			free(rules->forks);
+			rules->forks = NULL;
 			return (1);
 		}
 		i++;
@@ -43,6 +44,8 @@ void	destroy_all_fork(t_rules *rules)
 {
 	int	i;
 
+	if (!rules->forks)
+		return ;
 	i = 0;
 	while (i < rules->n_philo)
 	{
@@ -50,5 +53,6 @@ void	destroy_all_fork(t_rules *rules)
 		i++;
 	}
 	free(rules->forks);
+	rules->forks = NULL;
 	return ;
 }

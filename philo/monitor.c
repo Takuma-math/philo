@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:06:30 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/07 00:56:22 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/10 09:22:19 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ void	*monitor_routine(void *arg)
 		{
 			if (m_check(rules, &philos[i], &meal_complete_num))
 				return (frag_dead(rules), dead_print(rules, &philos[i]), NULL);
-			if (meal_complete_num == rules->n_philo)
-				return (frag_dead(rules), NULL);
 			i++;
 		}
+		if (rules->must_eat_count != -1 && meal_complete_num == rules->n_philo)
+			return (frag_dead(rules), NULL);
 		usleep(100);
 	}
 	return (NULL);
