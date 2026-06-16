@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 22:06:30 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/10 09:22:19 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/16 23:56:58 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	frag_dead(t_rules *rules)
 static void	dead_print(t_rules *rules, t_philo *philo)
 {
 	pthread_mutex_lock(&rules->print_mutex);
-	printf("%lld %d died\n", get_time_ms() - rules->start_time,
+	printf("%lld %d died\n", (get_time_us() - rules->start_time_us) / 1000,
 		philo->id);
 	pthread_mutex_unlock(&rules->print_mutex);
 	return ;
@@ -44,9 +44,10 @@ static int	m_check(t_rules *rules, t_philo *phi, int *m_num)
 	long long	current_time;
 	int			is_dead;
 
-	current_time = get_time_ms();
+	current_time = get_time_us();
 	pthread_mutex_lock(&phi->meal_mutex);
-	is_dead = (current_time - phi->last_meal_time > rules->t_to_die);
+	is_dead = current_time - phi->last_meal_time_us
+		> (long long)rules->t_to_die;
 	if (rules->must_eat_count != -1
 		&& phi->meal_count >= rules->must_eat_count)
 		(*m_num)++;
@@ -75,7 +76,7 @@ void	*monitor_routine(void *arg)
 		}
 		if (rules->must_eat_count != -1 && meal_complete_num == rules->n_philo)
 			return (frag_dead(rules), NULL);
-		usleep(100);
+		usleep(500);
 	}
 	return (NULL);
 }

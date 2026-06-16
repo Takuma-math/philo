@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 12:43:34 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/04 01:49:55 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/16 23:02:19 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	start_philo_thread(t_rules *rules, t_philo *philos)
 	i = 0;
 	while (i < rules->n_philo)
 	{
-		philos[i].last_meal_time = rules->start_time;
+		philos[i].last_meal_time_us = rules->start_time_us;
 		if (pthread_create(&philos[i].thread, NULL, &philo_routine, &philos[i]))
 		{
 			pthread_mutex_lock(&rules->death_mutex);

@@ -3,10 +3,7 @@ CC          = cc
 CFLAGS      = -Wall -Wextra -Werror -pthread
 RM          = rm -f
 
-# SRC_DIR     = philo/
-# SRC         = $(SRC_DIR)main.c
-
-SRC         = main.c parse_input.c fork.c prepare.c philo_routine.c utils.c monitor.c
+SRC         = main.c parse_input.c fork.c prepare.c philo_routine_utils.c philo_routine.c utils.c monitor.c
 OBJ         = $(SRC:.c=.o)
 
 all: $(NAME)

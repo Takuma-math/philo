@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 17:27:51 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/10 00:31:59 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/16 23:50:44 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,27 @@ void	print_status(t_philo *philo, char *status)
 		pthread_mutex_unlock(&philo->rules->print_mutex);
 		return ;
 	}
-	timestamp = get_time_ms() - philo->rules->start_time;
+	timestamp = (get_time_us() - philo->rules->start_time_us) / 1000;
 	printf("%lld %d %s\n", timestamp, philo->id, status);
 	pthread_mutex_unlock(&philo->rules->print_mutex);
 }
 
-void	ft_usleep(long long milliseconds, t_rules *rules)
+void	ft_usleep(long long usec, t_rules *rules)
 {
 	long long	start_time;
+	long long	remaining;
 
-	start_time = get_time_ms();
-	while ((get_time_ms() - start_time) < milliseconds)
+	start_time = get_time_us();
+	while (1)
 	{
 		if (check_dead_status(rules))
 			break ;
-		usleep(100);
+		remaining = usec - (get_time_us() - start_time);
+		if (remaining <= 0)
+			break ;
+		if (remaining > 1500)
+			usleep(1000);
+		else if (remaining > 500)
+			usleep(300);
 	}
 }
