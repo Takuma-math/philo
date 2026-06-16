@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/12 15:34:05 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/17 00:22:36 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/17 00:27:48 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int	main(int argc, char **argv)
 	if (fork_prepare(&rules))
 	{
 		mutex_destroyer(&rules, NULL);
-		return (print_error("fail to create fork_mutex"), 1);
+		return (print_error("fail to create fork_mutex\n"), 1);
 	}
 	if (prepare_philos(&philos, &rules))
 	{
 		mutex_destroyer(&rules, NULL);
-		return (print_error("fail to malloc philos"), 1);
+		return (print_error("fail to malloc philos\n"), 1);
 	}
 	rules.start_time_us = get_time_us();
 	if (start_simulation(&rules, philos))

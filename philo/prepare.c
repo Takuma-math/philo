@@ -6,7 +6,7 @@
 /*   By: takhayas <hayatakucat@icloud.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 12:43:34 by takhayas          #+#    #+#             */
-/*   Updated: 2026/06/16 23:02:19 by takhayas         ###   ########.fr       */
+/*   Updated: 2026/06/17 00:35:13 by takhayas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ int	start_simulation(t_rules *rules, t_philo *philos)
 	int	i;
 
 	if (start_philo_thread(rules, philos))
-		return (printf ("fail to create philos thread"), 1);
+		return (print_error ("fail to create philos thread\n"), 1);
 	if (start_monitor_thread(rules, philos))
-		return (printf ("fail to create monitor thread"), 1);
+		return (print_error ("fail to create monitor thread\n"), 1);
 	i = 0;
 	while (i < rules->n_philo)
 	{
